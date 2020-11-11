@@ -1,0 +1,15 @@
+version: "3"
+services:
+ mysql:
+  image: mysql:latest
+  environment:
+    MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+    MYSQL_USER: "${MYSQL_USER}"
+    MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+  volumes:
+   - ~/numercity/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+   - ~/numercity/etc/mysql:/etc/mysql
+   - ~/numercity/var/lib/mysql:/var/lib/mysql
+   - ~/numercity/var/run/mysqld:/var/run/mysqld
+  ports:
+   - "3306:3306"
