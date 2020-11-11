@@ -13,3 +13,7 @@ services:
    - ./var/run/mysqld:/var/run/mysqld
   ports:
    - "3306:3306"
+ referential:
+  image: numercity-referential:latest
+  ports:
+   - "8080:8080"
