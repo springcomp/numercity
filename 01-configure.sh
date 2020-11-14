@@ -50,6 +50,10 @@ cp binaries/request.jar Dockerfiles/request/context/
 cp binaries/view.jar Dockerfiles/view/context/
 cp binaries/vote.jar Dockerfiles/vote/context/
 
+cp -R var/www/numercity.dev/certs/ Dockerfiles/admin/context/
+cp -R var/www/numercity.dev/certs/ Dockerfiles/request/context/
+cp -R var/www/numercity.dev/certs/ Dockerfiles/referential/context/
+cp -R var/www/numercity.dev/certs/ Dockerfiles/user/context/
 cp -R var/www/numercity.dev/certs/ Dockerfiles/view/context/
 cp -R var/www/numercity.dev/certs/ Dockerfiles/vote/context/
 
