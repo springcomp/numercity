@@ -1,5 +1,5 @@
 FROM openjdk:14
-COPY . /opt/referential/
+COPY . /opt/numercity/
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=dev", "/opt/referential/referential.jar"]
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=docker", "/opt/numercity/referential.jar"]
