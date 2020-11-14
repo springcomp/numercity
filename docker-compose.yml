@@ -17,3 +17,41 @@ services:
   image: numercity-referential:latest
   ports:
    - "8080:8080"
+ request:
+  image: numercity-request:latest
+  ports:
+   - "8081:8081"
+ user:
+  image: numercity-user:latest
+  volumes:
+   - ./var/numercity/proof:/proof
+  ports:
+   - "8082:8082"
+ auth:
+  image: numercity-auth:latest
+  volumes:
+   - ./var/numercity/KeyPair:/opt/numercity/KeyPair
+  ports:
+   - "8083:8083"
+ view:
+  image: numercity-view:latest
+  ports:
+   - "8084:8084"
+ vote:
+  image: numercity-vote:latest
+  ports:
+   - "8085:8085"
+ admin:
+  image: numercity-admin:latest
+  ports:
+   - "8086:8086"
+ numercity.dev:
+  image: nginx
+  volumes:
+   - ./etc/nginx:/etc/nginx
+   - ./usr/share/nginx:/usr/share/nginx
+   - ./var/www/numercity.dev/certs:/var/www/numercity.dev/certs
+   - ./var/www/numercity.dev/html:/var/www/numercity.dev/html
+  ports:
+   - "80:80"
+   - "443:443"

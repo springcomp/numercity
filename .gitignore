@@ -1,9 +1,12 @@
 docker-entrypoint-initdb.d/
+binaries/
 
 var/lib/mysql/
 var/run/mysqld/
 
 var/numercity/KeyPair/
+var/numercity/proof/
+var/www/numercity.dev/
 
 ## vim swap files
 *\.swp

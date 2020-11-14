@@ -1,0 +1,299 @@
+upstream user_api {
+	server user:8082;
+}
+upstream auth_api {
+	server auth:8083;
+}
+upstream view_api {
+	server view:8084;
+}
+upstream request_api {
+	server request:8081;
+}
+upstream referential_api {
+	server referential:8080;
+}
+upstream vote_api {
+	server vote:8085;
+}
+upstream admin_api {
+	server admin:8087;
+}
+
+server {
+	root /var/www/numercity.dev/html;
+	server_name numercity.dev; 
+	
+	add_header Access-Control-Allow-Origin "https://numercity.dev" always;
+        add_header Access-Control-Allow-Methods "GET, OPTIONS, POST, PUT, DELETE" always;
+        add_header Access-Control-Allow-Credentials true always;
+	
+	client_max_body_size 4M;
+	
+	location /auth {	
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://auth_api;
+		
+	}
+        location /auth/redirect {
+                include         /etc/nginx/proxy_params;
+                proxy_pass      http://auth_api;
+        }
+        location /trustees {
+                include         /etc/nginx/proxy_params;
+                proxy_pass      http://auth_api;
+        }
+	location /oauth2/callback {	
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://auth_api;
+	}
+	location /oauth2/authorize {	
+		include 	/etc/nginx/proxy_params;
+		proxy_pass	http://auth_api;
+	}
+	location /user/me {	
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://auth_api;
+	}
+	location /users {
+        	include         /etc/nginx/proxy_params;
+
+		# Preflighted requests
+		if ($request_method = 'OPTIONS') {
+			add_header Access-Control-Allow-Origin "https://numercity.dev";
+			add_header Access-Control-Allow-Methods "GET, OPTIONS, POST, PUT, DELETE";
+			add_header Access-Control-Allow-Credentials true;
+			add_header 'Access-Control-Allow-Headers' 'User-Agent,Content-Type';
+                	add_header 'Access-Control-Max-Age' 1728000;
+			add_header 'Content-Type' 'text/plain charset=UTF-8';
+                	add_header 'Content-Length' 0;
+			return 204;
+        	} 
+		if ($request_method != 'OPTIONS') {
+			proxy_pass	http://user_api;
+		}
+	}
+	location /groups {
+        	include         /etc/nginx/proxy_params;
+
+		# Preflighted requests
+		if ($request_method = 'OPTIONS') {
+			add_header Access-Control-Allow-Origin "https://numercity.fr";
+			add_header Access-Control-Allow-Methods "GET, OPTIONS, POST, PUT, DELETE";
+			add_header Access-Control-Allow-Credentials true;
+			add_header 'Access-Control-Allow-Headers' 'User-Agent,Content-Type';
+                	add_header 'Access-Control-Max-Age' 1728000;
+			add_header 'Content-Type' 'text/plain charset=UTF-8';
+                	add_header 'Content-Length' 0;
+			return 204;
+        	} 
+		if ($request_method != 'OPTIONS') {
+			proxy_pass	http://user_api;
+		}
+	}
+	location /qualityType {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://user_api;
+	}
+	location /concernedPopulation {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://user_api;
+	}
+	location /dashboard/members {
+		include         /etc/nginx/proxy_params;
+                proxy_pass      http://user_api;
+	
+	}
+	location /dashboard/download {
+                include         /etc/nginx/proxy_params;
+                proxy_pass      http://user_api;
+
+        }
+	location /enums {
+		include         /etc/nginx/proxy_params;
+                proxy_pass      http://user_api;
+	}
+	 location /user-right/denomination {
+                include         /etc/nginx/proxy_params;
+                proxy_pass      http://user_api;
+        }
+
+        location /dashboard/makers {
+                include         /etc/nginx/proxy_params;
+                proxy_pass      http://user_api;
+        }
+	location /notifications {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://user_api;
+	}
+	location /user-right {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://user_api;
+	}
+	location /member-profile {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://user_api;
+	}
+
+	location /request-views {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://view_api;
+	}
+	location /decision-maker-views {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://view_api;
+	}
+	location /perimeter-views {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://view_api;
+	}
+	location /population-views {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://view_api;
+	}
+	location /profile-authority {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://view_api;
+	}
+	location /group-views {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://view_api;
+	}
+	location /activity-views {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://view_api;
+	}
+	location /notification-views {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://view_api;
+	}
+        location /decision-views {
+                include        /etc/nginx/proxy_params;
+                proxy_pass      http://view_api;
+
+        }
+	location /place-views {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://view_api;
+	}
+	location /user-views {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://view_api;
+	}
+	location /item-response {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://view_api;
+	}
+	location /requests {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://request_api;
+	}
+	location /documents {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://request_api;
+	}
+	location /analyseur {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://request_api;
+	}
+	location /reviews {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://request_api;
+	}
+	location /choices {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://request_api;
+	}
+	location /attachments {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://request_api;
+	}
+	location /activity {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://request_api;
+	}
+	location /decisions {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://request_api;
+	}
+	location /signers {
+                include        /etc/nginx/proxy_params;
+                proxy_pass     http://request_api;
+        }
+        location /documentParameter {
+                include        /etc/nginx/proxy_params;
+                proxy_pass     http://request_api;
+        }
+	location /authorities {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://referential_api;
+	}
+	location /organizations {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://referential_api;
+	}
+	location /topics {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://referential_api;
+	}
+	location /zones {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://referential_api;
+	}
+	location /ballots {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://vote_api;
+	}
+	location /votes {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://vote_api;
+	}
+	location /ballotsboxes {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://vote_api;
+	}
+	location /values {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://admin_api;
+	}
+        location /reports {
+                include        /etc/nginx/proxy_params;
+                proxy_pass     http://admin_api;
+        }
+	location /questions {
+		include		/etc/nginx/proxy_params;
+		proxy_pass	http://admin_api;
+	}
+	location / {
+		auth_basic "User and Password are required"; 
+      		auth_basic_user_file /etc/nginx/.htpasswd;
+		try_files $uri $uri/ /index.html;
+		proxy_set_header   Host             $http_host;
+  		proxy_set_header   X-Real-IP        $remote_addr;
+  		proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for; 
+		proxy_set_header   Authorization $http_authorization;
+		proxy_pass_header  Authorization;
+
+	}
+	location /assets/ {
+		auth_basic off;
+	}
+	listen			443 ssl; 
+	ssl_certificate		/var/www/numercity.dev/certs/numercity.dev.crt;
+	ssl_certificate_key	/var/www/numercity.dev/certs/numercity.dev.key;
+	ssl_protocols		TLSv1 TLSv1.1 TLSv1.2;
+	ssl_ciphers		HIGH:!aNULL:!MD5;
+}
+
+server {
+    if ($host = numercity.dev) {
+        return 301 https://$host$request_uri;
+    } 
+
+    listen 80;
+    listen [::]:80;
+
+    server_name numercity.dev;
+    return 404;
+}
+
