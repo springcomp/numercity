@@ -10,6 +10,9 @@
 [[ ! -d var/run/ ]] && mkdir var/run/
 [[ ! -d var/run/mysqld ]] && mkdir var/run/mysqld/
 
+[[ ! -d var/www/numercity.dev/html/ ]] && mkdir var/www/numercity.dev/html/
+[[ ! -d var/www/numercity.dev/certs/ ]] && mkdir var/www/numercity.dev/certs/
+
 chmod 777 var/run/mysqld/
 
 ## MySQL Server backup
@@ -28,8 +31,8 @@ cp -r binaries/proof var/numercity/proof
 
 openssl req -x509  -sha256 -nodes -newkey rsa:2048 \
 	-days 720 \
-	-keyout ./var/www/numercity.dev/certs/numercity.dev.key \
-	-out ./var/www/numercity.dev/certs/numercity.dev.crt \
+	-keyout var/www/numercity.dev/certs/numercity.dev.key \
+	-out var/www/numercity.dev/certs/numercity.dev.crt \
 	-subj '/C=FR/O=NumerCity/CN=numercity.dev/emailAddress=contact@numercity.fr/subjectAltName=DNS.1=numercity.dev,DNS.2=localhost,DNS.3=127.0.0.1/'
 
 ## Setup docker image contexts
