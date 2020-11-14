@@ -18,8 +18,8 @@ rm -f etc/nginx/.htpasswd
 [[ -d "var/numercity/proof/" ]] && rm -rf var/numercity/proof/
 [[ -d "var/numercity/KeyPair/" ]] && rm -rf var/numercity/KeyPair/
 
-rm -f $( find var/logs/debug -maxdepth 1 -type f -name "*" ! -name "_" )
-rm -f $( find var/logs/error -maxdepth 1 -type f -name "*" ! -name "_" )
+rm -f var/logs/debug/*.log
+rm -f var/logs/error/*.log
 
 [[ -d "var/www/numercity.dev/html/" ]] && rm -rf var/www/numercity.dev/html/
 [[ -d "var/www/numercity.dev/certs/" ]] && rm -rf var/www/numercity.dev/certs/

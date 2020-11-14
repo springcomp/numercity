@@ -11,6 +11,7 @@ services:
    - ./etc/mysql:/etc/mysql
    - ./var/lib/mysql:/var/lib/mysql
    - ./var/run/mysqld:/var/run/mysqld
+   - /usr/share/zoneinfo:/usr/share/zoneinfo
   ports:
    - "3306:3306"
   security_opt:
