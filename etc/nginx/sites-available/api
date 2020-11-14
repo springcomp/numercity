@@ -1,23 +1,23 @@
 upstream user_api {
-	server user:8082;
+	server numercity.dev:8082;
 }
 upstream auth_api {
-	server auth:8083;
+	server numercity.dev:8083;
 }
 upstream view_api {
-	server view:8084;
+	server numercity.dev:8084;
 }
 upstream request_api {
-	server request:8081;
+	server numercity.dev:8081;
 }
 upstream referential_api {
-	server referential:8080;
+	server numercity.dev:8080;
 }
 upstream vote_api {
-	server vote:8085;
+	server numercity.dev:8085;
 }
 upstream admin_api {
-	server admin:8087;
+	server numercity.dev:8087;
 }
 
 server {
@@ -78,7 +78,7 @@ server {
 
 		# Preflighted requests
 		if ($request_method = 'OPTIONS') {
-			add_header Access-Control-Allow-Origin "https://numercity.fr";
+			add_header Access-Control-Allow-Origin "https://numercity.dev";
 			add_header Access-Control-Allow-Methods "GET, OPTIONS, POST, PUT, DELETE";
 			add_header Access-Control-Allow-Credentials true;
 			add_header 'Access-Control-Allow-Headers' 'User-Agent,Content-Type';
