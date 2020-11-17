@@ -29,7 +29,7 @@ cp -r binaries/KeyPair var/numercity/KeyPair
 ## User proof/ folder
 cp -r binaries/proof var/numercity/proof
 
-. "${BASH_SOURCE%/*}/11-cert.sh"
+[[ ! -f var/www/numercity.dev/certs/numercity.dev.crt ]] && . "${BASH_SOURCE%/*}/11-cert.sh"
 . "${BASH_SOURCE%/*}/12-docker-files.sh"
 . "${BASH_SOURCE%/*}/13-docker-images.sh"
 
