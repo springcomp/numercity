@@ -9,7 +9,7 @@ Those must be supplied before running those scripts.
 Run the following scripts:
 
 ```
-./01-bootstrap-mysql.sh
+./01-configure.sh
 
 docker-compose up --detach
 ```
