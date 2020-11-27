@@ -22,12 +22,16 @@ services:
    - ./var/logs:/logs
   ports:
    - "8080:8080"
+  depends_on:
+   - "mysql"
  request:
   image: numercity-request:latest
   volumes:
    - ./var/logs:/logs
   ports:
    - "8081:8081"
+  depends_on:
+   - "mysql"
  user:
   image: numercity-user:latest
   volumes:
@@ -35,6 +39,8 @@ services:
    - ./var/numercity/proof:/proof
   ports:
    - "8082:8082"
+  depends_on:
+   - "mysql"
  auth:
   image: numercity-auth:latest
   volumes:
@@ -42,24 +48,32 @@ services:
    - ./var/numercity/KeyPair:/opt/numercity/KeyPair
   ports:
    - "8083:8083"
+  depends_on:
+   - "mysql"
  view:
   image: numercity-view:latest
   volumes:
    - ./var/logs:/logs
   ports:
    - "8084:8084"
+  depends_on:
+   - "mysql"
  vote:
   image: numercity-vote:latest
   volumes:
    - ./var/logs:/logs
   ports:
    - "8085:8085"
+  depends_on:
+   - "mysql"
  admin:
   image: numercity-admin:latest
   volumes:
    - ./var/logs:/logs
   ports:
    - "8086:8086"
+  depends_on:
+   - "mysql"
  numercity.dev:
   image: nginx
   volumes:
@@ -70,3 +84,11 @@ services:
   ports:
    - "80:80"
    - "443:443"
+  depends_on:
+   - "admin"
+   - "auth"
+   - "referential"
+   - "request"
+   - "user"
+   - "view"
+   - "vote"
