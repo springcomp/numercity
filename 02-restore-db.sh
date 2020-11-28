@@ -8,6 +8,7 @@ docker run --name mysql --detach \
   --mount "type=bind,source=/home/$USER/numercity/docker-entrypoint-initdb.d,target=/docker-entrypoint-initdb.d,readonly" \
   --mount "type=bind,source=/home/$USER/numercity/etc/mysql,target=/etc/mysql,readonly" \
   --mount "type=bind,source=/home/$USER/numercity/var/lib/mysql,target=/var/lib/mysql" \
+  --mount "type=bind,source=/home/$USER/numercity/var/logs,target=/var/logs" \
   --mount "type=bind,source=/home/$USER/numercity/var/run/mysqld,target=/var/run/mysqld" \
   --mount "type=bind,source=/usr/share/zoneinfo,target=/usr/share/zoneinfo,readonly" \
   mysql:latest

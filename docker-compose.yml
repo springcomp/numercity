@@ -10,6 +10,7 @@ services:
    - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
    - ./etc/mysql:/etc/mysql
    - ./var/lib/mysql:/var/lib/mysql
+   - ./var/logs:/var/logs
    - ./var/run/mysqld:/var/run/mysqld
    - /usr/share/zoneinfo:/usr/share/zoneinfo
   ports:
