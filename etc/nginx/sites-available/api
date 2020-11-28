@@ -167,11 +167,11 @@ server {
 		include		/etc/nginx/proxy_params;
 		proxy_pass	http://view_api;
 	}
-        location /decision-views {
-                include        /etc/nginx/proxy_params;
-                proxy_pass      http://view_api;
+    location /decision-views {
+            include        /etc/nginx/proxy_params;
+            proxy_pass      http://view_api;
 
-        }
+    }
 	location /place-views {
 		include		/etc/nginx/proxy_params;
 		proxy_pass	http://view_api;

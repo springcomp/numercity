@@ -58,7 +58,12 @@ services:
   ports:
    - "8084:8084"
   depends_on:
-   - "mysql"
+   - "admin"
+   - "auth"
+   - "referential"
+   - "request"
+   - "user"
+   - "vote"
  vote:
   image: numercity-vote:latest
   volumes:
