@@ -77,7 +77,7 @@ services:
   volumes:
    - ./var/logs:/logs
   ports:
-   - "8086:8086"
+   - "8087:8087"
   depends_on:
    - "mysql"
  numercity.dev:
