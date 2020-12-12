@@ -1,0 +1,7 @@
+#!/bin/sh
+
+docker exec -it numercity_auth_1 curl \
+  -H 'Host: numercity.dev' \
+  -H 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI5YzQ2MmU0OC1mYmE4LTQxZDQtOGUyYy0xZjYwYjg1Yjc2NjMiLCJpYXQiOjE2MDc3NzMxNTEsImV4cCI6MjQ3MTc3MzE1MX0.B46VBUTZU2Y3MXkzhvT2UJp1NAIs66kkU_JE7SrJhwCbsNRzZY9lo8GJGPipM4fsaXgLEl0_Ytr5aMqVXCOzlNvoW5ZA3oWF_FBnxAmdfCA66v5Kw5_kljJ89Wq17RbsUh3lKBPaDRqgzZP_LiPMrDmGFIjnJ5Ti__BbgDgYhecoqPyLkAmGDu1fqeS1zz63XjwaxoYK3AMkpBgmRcHoyYoeAj_UNP-MODZ_VlSsm5JAbNWDIyyfCrcxfSzi_5qdF_6zQF6jWndrGtV5f1AmQ4mUoBwJtgF7D3U_8AsgLBRg4mQwCs7zdIa-ldq1h07Jtf71ZRCo26GiKmq6hwK-TQ' \
+  http://localhost:8083/auth/user/me
+
