@@ -78,6 +78,7 @@ services:
   image: numercity-vote:latest
   volumes:
    - ./var/logs:/logs
+   - ./var/numercity/ballots:/ballotsboxes
   ports:
    - "8085:8085"
   depends_on:
