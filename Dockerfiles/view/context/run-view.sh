@@ -1,3 +1,3 @@
 #!/bin/sh
-sleep 2m
+sleep 1m
 java -jar -Dspring.profiles.active=docker /opt/numercity/view.jar
