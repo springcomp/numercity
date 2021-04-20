@@ -18,7 +18,7 @@
 chmod 777 var/run/mysqld/
 
 ## MySQL Server backup
-cp binaries/numercity-mysql-dev1.sql docker-entrypoint-initdb.d/
+cp binaries/numercity-mysql-dev2.sql docker-entrypoint-initdb.d/
 
 ## NumerCity front-end application
 unzip -u -d var/www/numercity.dev/html/ binaries/dev.numercity.fr.zip
