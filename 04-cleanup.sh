@@ -24,3 +24,5 @@ rm -f var/logs/error/*.log
 [[ -d "var/www/numercity.dev/html/" ]] && rm -rf var/www/numercity.dev/html/
 [[ -d "var/www/numercity.dev/certs/" ]] && rm -rf var/www/numercity.dev/certs/
 
+## git checkout -- Dockerfiles/view/context/run-view.sh
+

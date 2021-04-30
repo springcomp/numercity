@@ -21,10 +21,11 @@ chmod 777 var/run/mysqld/
 cp binaries/numercity-mysql-dev2.sql docker-entrypoint-initdb.d/
 
 ## NumerCity front-end application
-unzip -u -d var/www/numercity.dev/html/ binaries/dev.numercity.fr.zip
+unzip -u -d var/www/numercity.dev/html/ 'binaries/dev.numercity.fr (new).zip'
+mv var/www/numercity.dev/html/assets/img/icons/icons8-fl*.png var/www/numercity.dev/html/assets/img/icons/icons8-flèche-développer-32.png
 
 ## Authentication KeyPair/ folder
-cp -r binaries/KeyPair var/numercity/KeyPair
+unzip -u -d var/numercity/KeyPair 'binaries/KeyPairs (new).zip'
 
 ## User proof/ folder
 cp -r binaries/proof var/numercity/proof
