@@ -147,7 +147,7 @@ services:
    - ./var/logs:/var/logs
    - ./var/run/mysqld:/var/run/mysqld
    - /usr/share/zoneinfo:/usr/share/zoneinfo
-  command: ["/bin/sh", "-c", "while true; do sleep 300; mysql --protocol tcp -h localhost -P 3306 --user processor < /etc/mysql/TO_BE_PROCESSED.sql; done;"]
+  command: ["/bin/sh", "-c", "while true; do sleep 120; mysql --protocol tcp -h mysql -P 3306 --user processor < /etc/mysql/TO_BE_PROCESSED.SQL; done;"]
   restart: unless-stopped
   depends_on:
    - "mysql"
