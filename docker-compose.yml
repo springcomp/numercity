@@ -15,6 +15,7 @@ services:
    - /usr/share/zoneinfo:/usr/share/zoneinfo
   ports:
    - "3306:3306"
+  restart: unless-stopped
   security_opt:
    - seccomp:unconfined
  referential:
@@ -23,6 +24,7 @@ services:
    - ./var/logs:/logs
   ports:
    - "8080:8080"
+  restart: unless-stopped
   depends_on:
    - "auth"
    - "mysql"
@@ -32,6 +34,7 @@ services:
    - ./var/logs:/logs
   ports:
    - "8081:8081"
+  restart: unless-stopped
   depends_on:
    - "auth"
    - "referential"
@@ -46,6 +49,7 @@ services:
    - ./var/numercity/proof:/proof
   ports:
    - "8082:8082"
+  restart: unless-stopped
   depends_on:
    - "auth"
    - "referential"
@@ -58,6 +62,7 @@ services:
    - ./var/numercity/KeyPair:/opt/numercity/KeyPair
   ports:
    - "8083:8083"
+  restart: unless-stopped
   depends_on:
    - "mysql"
  view:
@@ -66,6 +71,7 @@ services:
    - ./var/logs:/logs
   ports:
    - "8084:8084"
+  restart: unless-stopped
   depends_on:
    - "auth"
    - "referential"
@@ -81,6 +87,7 @@ services:
    - ./var/numercity/ballots:/ballotsboxes
   ports:
    - "8085:8085"
+  restart: unless-stopped
   depends_on:
    - "auth"
    - "referential"
@@ -93,6 +100,7 @@ services:
    - ./var/logs:/logs
   ports:
    - "8087:8087"
+  restart: unless-stopped
   depends_on:
    - "auth"
    - "referential"
@@ -107,6 +115,7 @@ services:
   ports:
    - "80:80"
    - "443:443"
+  restart: unless-stopped
   depends_on:
    - "auth"
    - "referential"
@@ -115,8 +124,30 @@ services:
    - "vote"
    - "request"
    - "view"
- restarter:
+ user-restarter:
+  image: docker
+  volumes: ["/var/run/docker.sock:/var/run/docker.sock"]
+  command: ["/bin/sh", "-c", "while true; do sleep 300; docker restart numercity_user_1; done;"]
+  restart: unless-stopped
+  depends_on:
+   - "user"
+ vote-restarter:
   image: docker
   volumes: ["/var/run/docker.sock:/var/run/docker.sock"]
   command: ["/bin/sh", "-c", "while true; do sleep 300; docker restart numercity_vote_1; done;"]
   restart: unless-stopped
+  depends_on:
+   - "vote"
+ mysql_event_processor:
+  image: mysql:latest
+  volumes:
+   - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+   - ./etc/mysql:/etc/mysql
+   - ./var/lib/mysql:/var/lib/mysql
+   - ./var/logs:/var/logs
+   - ./var/run/mysqld:/var/run/mysqld
+   - /usr/share/zoneinfo:/usr/share/zoneinfo
+  command: ["/bin/sh", "-c", "while true; do sleep 300; mysql --protocol tcp -h localhost -P 3306 --user processor < /etc/mysql/TO_BE_PROCESSED.sql; done;"]
+  restart: unless-stopped
+  depends_on:
+   - "mysql"
